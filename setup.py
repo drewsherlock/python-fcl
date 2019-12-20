@@ -3,6 +3,7 @@ import sys
 import inspect
 
 from setuptools import Extension, setup
+import numpy
 
 
 # get current directory of file in case someone
@@ -23,6 +24,12 @@ for prefix in ['darwin', 'linux', 'bsd']:
                         '/usr/include/eigen3']
         lib_dirs = ['/usr/lib',
                     '/usr/local/lib']
+
+        extra_compile_args = ["-std=c++11"]
+        libraries=[
+                "fcl","octomap"
+                ],
+        data_files = []
         
         if 'CPATH' in os.environ:
             include_dirs += os.environ['CPATH'].split(':')
@@ -39,8 +46,27 @@ for prefix in ['darwin', 'linux', 'bsd']:
         break
 
 if sys.platform == "win32":
-    platform_supported = False
+    platform_supported = True
+    extra_compile_args = [""]
+    include_dirs = ['C:\\Program Files\\fcl\\include',
+                    '..\\boost_1_72_0',
+                   numpy.get_include(),
+                    ]
+    lib_dirs = ['../fcl/build/lib/Release',
+                '../boost_1_72_0/stage/lib',
+                '../libccd/build/src/Release']
 
+    #libraries = [
+    #            "C:\\Program Files\\libccd\\lib\\ccd.lib",
+    #            "C:\\Program Files\\fcl\\lib\\fcl.lib"
+    #            ],                
+
+    libraries = ["fcl",
+                 "ccd"
+                ]
+    
+    data_files=[('', ['../libccd/build/src/Release/ccd.dll'])]
+                
 if not platform_supported:
     raise NotImplementedError(sys.platform)
 
@@ -77,10 +103,11 @@ setup(
         ["fcl/fcl.pyx"],
         include_dirs = include_dirs,
         library_dirs = lib_dirs,
-        libraries=[
-                "fcl","octomap"
-                ],
-        language="c++",
-        extra_compile_args = ["-std=c++11"]
-    )]
+        libraries = libraries,
+        language = "c++",
+        extra_compile_args = extra_compile_args,
+    )],
+    language_level=3,
+    compiler="msvc",
+    data_files=data_files
 )
