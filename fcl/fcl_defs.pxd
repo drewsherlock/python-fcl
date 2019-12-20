@@ -3,7 +3,8 @@ from libcpp.string cimport string
 from libcpp.vector cimport vector
 from libcpp.set cimport set
 from libcpp.memory cimport shared_ptr
-cimport octomap_defs as octomap
+# AS remove for Windows
+#cimport octomap_defs as octomap
 
 cdef extern from "Python.h":
        ctypedef struct PyObject
@@ -400,10 +401,10 @@ cdef extern from "fcl/BVH/BVH_model.h" namespace "fcl":
 
         # void computeLocalAABB()
 
-
-cdef extern from "fcl/octree.h" namespace "fcl":
-    cdef cppclass OcTree(CollisionGeometry):
-        # Constructing
-        OcTree(FCL_REAL resolution) except +
-        OcTree(shared_ptr[octomap.OcTree]& tree_) except +
+# AS remove for Windows
+#cdef extern from "fcl/octree.h" namespace "fcl":
+#    cdef cppclass OcTree(CollisionGeometry):
+#        # Constructing
+#        OcTree(FCL_REAL resolution) except +
+#        OcTree(shared_ptr[octomap.OcTree]& tree_) except +
 
