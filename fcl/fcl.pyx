@@ -12,7 +12,8 @@ import numpy
 ctypedef np.float64_t DOUBLE_t
 
 cimport fcl_defs as defs
-cimport octomap_defs as octomap 
+# AS remove for windows 
+# cimport octomap_defs as octomap 
 cimport std_defs as std 
 from collision_data import Contact, CostSource, CollisionRequest, ContinuousCollisionRequest, CollisionResult, ContinuousCollisionResult, DistanceRequest, DistanceResult
 
@@ -396,17 +397,18 @@ cdef class BVHModel(CollisionGeometry):
         else:
             return False
 
-cdef class OcTree(CollisionGeometry):
-    cdef octomap.OcTree* tree
-
-    def __cinit__(self, r, data):
-        cdef std.stringstream ss
-        cdef vector[char] vd = data
-        ss.write(vd.data(), len(data))
-
-        self.tree = new octomap.OcTree(r) 
-        self.tree.readBinaryData(ss)
-        self.thisptr = new defs.OcTree(defs.shared_ptr[octomap.OcTree](self.tree))
+# AS remove for windows 
+#cdef class OcTree(CollisionGeometry):
+#    cdef octomap.OcTree* tree
+#
+#    def __cinit__(self, r, data):
+#        cdef std.stringstream ss
+#        cdef vector[char] vd = data
+#        ss.write(vd.data(), len(data))
+#
+#        self.tree = new octomap.OcTree(r) 
+#        self.tree.readBinaryData(ss)
+#        self.thisptr = new defs.OcTree(defs.shared_ptr[octomap.OcTree](self.tree))
 
 
 ###############################################################################
@@ -523,17 +525,18 @@ cdef class DynamicAABBTreeCollisionManager:
         def __set__(self, value):
             self.thisptr.tree_init_level = <int?> value
 
-    property octree_as_geometry_collide:
-        def __get__(self):
-            return self.thisptr.octree_as_geometry_collide
-        def __set__(self, value):
-            self.thisptr.octree_as_geometry_collide = <bool?> value
+    # AS remove for Windows
+    #property octree_as_geometry_collide:
+    #    def __get__(self):
+    #        return self.thisptr.octree_as_geometry_collide
+    #    def __set__(self, value):
+    #        self.thisptr.octree_as_geometry_collide = <bool?> value
 
-    property octree_as_geometry_distance:
-        def __get__(self):
-            return self.thisptr.octree_as_geometry_distance
-        def __set__(self, value):
-            self.thisptr.octree_as_geometry_distance = <bool?> value
+    #property octree_as_geometry_distance:
+    #    def __get__(self):
+     #       return self.thisptr.octree_as_geometry_distance
+    #    def __set__(self, value):
+    #        self.thisptr.octree_as_geometry_distance = <bool?> value
 
 ###############################################################################
 # Collision and distance functions
