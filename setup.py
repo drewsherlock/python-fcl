@@ -43,6 +43,46 @@ for prefix in ['darwin', 'linux', 'bsd']:
         except:
             pass
 
+        setup(
+            name='python-fcl',
+            version=__version__,
+            description='Python bindings for the Flexible Collision Library',
+            long_description='Python bindings for the Flexible Collision Library',
+            url='https://github.com/BerkeleyAutomation/python-fcl',
+            author='Matthew Matl',
+            author_email='mmatl@eecs.berkeley.edu',
+            license = "BSD",
+            classifiers=[
+                'Development Status :: 3 - Alpha',
+                'License :: OSI Approved :: BSD License',
+                'Operating System :: POSIX :: Linux',
+                'Programming Language :: Python :: 2',
+                'Programming Language :: Python :: 2.7',
+                'Programming Language :: Python :: 3',
+                'Programming Language :: Python :: 3.0',
+                'Programming Language :: Python :: 3.1',
+                'Programming Language :: Python :: 3.2',
+                'Programming Language :: Python :: 3.3',
+                'Programming Language :: Python :: 3.4',
+                'Programming Language :: Python :: 3.5',
+                'Programming Language :: Python :: 3.6',
+            ],
+            keywords='fcl collision distance',
+            packages=['fcl'],
+            setup_requires=['cython'],
+            install_requires=['numpy', 'cython'],
+            ext_modules=[Extension(
+                "fcl.fcl",
+                ["fcl/fcl.pyx"],
+                include_dirs = include_dirs,
+                library_dirs = lib_dirs,
+                libraries = libraries,
+                language = "c++",
+                extra_compile_args = extra_compile_args,
+            )],
+            language_level=3,
+            data_files=data_files
+        )
         break
 
 if sys.platform == "win32":
@@ -66,48 +106,50 @@ if sys.platform == "win32":
                 ]
     
     data_files=[('', ['../libccd/build/src/Release/ccd.dll'])]
+
+    setup(
+        name='python-fcl',
+        version=__version__,
+        description='Python bindings for the Flexible Collision Library',
+        long_description='Python bindings for the Flexible Collision Library',
+        url='https://github.com/BerkeleyAutomation/python-fcl',
+        author='Matthew Matl',
+        author_email='mmatl@eecs.berkeley.edu',
+        license = "BSD",
+        classifiers=[
+            'Development Status :: 3 - Alpha',
+            'License :: OSI Approved :: BSD License',
+            'Operating System :: POSIX :: Linux',
+            'Programming Language :: Python :: 2',
+            'Programming Language :: Python :: 2.7',
+            'Programming Language :: Python :: 3',
+            'Programming Language :: Python :: 3.0',
+            'Programming Language :: Python :: 3.1',
+            'Programming Language :: Python :: 3.2',
+            'Programming Language :: Python :: 3.3',
+            'Programming Language :: Python :: 3.4',
+            'Programming Language :: Python :: 3.5',
+            'Programming Language :: Python :: 3.6',
+        ],
+        keywords='fcl collision distance',
+        packages=['fcl'],
+        setup_requires=['cython'],
+        install_requires=['numpy', 'cython'],
+        ext_modules=[Extension(
+            "fcl.fcl",
+            ["fcl/fcl.pyx"],
+            include_dirs = include_dirs,
+            library_dirs = lib_dirs,
+            libraries = libraries,
+            language = "c++",
+            extra_compile_args = extra_compile_args,
+        )],
+        language_level=3,
+        compiler="msvc",
+        data_files=data_files
+    )
                 
 if not platform_supported:
     raise NotImplementedError(sys.platform)
 
-setup(
-    name='python-fcl',
-    version=__version__,
-    description='Python bindings for the Flexible Collision Library',
-    long_description='Python bindings for the Flexible Collision Library',
-    url='https://github.com/BerkeleyAutomation/python-fcl',
-    author='Matthew Matl',
-    author_email='mmatl@eecs.berkeley.edu',
-    license = "BSD",
-    classifiers=[
-        'Development Status :: 3 - Alpha',
-        'License :: OSI Approved :: BSD License',
-        'Operating System :: POSIX :: Linux',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.0',
-        'Programming Language :: Python :: 3.1',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-    ],
-    keywords='fcl collision distance',
-    packages=['fcl'],
-    setup_requires=['cython'],
-    install_requires=['numpy', 'cython'],
-    ext_modules=[Extension(
-        "fcl.fcl",
-        ["fcl/fcl.pyx"],
-        include_dirs = include_dirs,
-        library_dirs = lib_dirs,
-        libraries = libraries,
-        language = "c++",
-        extra_compile_args = extra_compile_args,
-    )],
-    language_level=3,
-    compiler="msvc",
-    data_files=data_files
-)
+
