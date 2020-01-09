@@ -27,9 +27,8 @@ for prefix in ['darwin', 'linux', 'bsd']:
 
         extra_compile_args = ["-std=c++11"]
         libraries=[
-                "fcl","octomap"
+                'fcl','octomap'
                 ],
-        data_files=[('', [''])]
         
         if 'CPATH' in os.environ:
             include_dirs += os.environ['CPATH'].split(':')
@@ -82,7 +81,6 @@ for prefix in ['darwin', 'linux', 'bsd']:
             )],
             language_level=3,
             compiler="gcc",
-            data_files=data_files
         )
         break
 
