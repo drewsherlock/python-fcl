@@ -35,6 +35,9 @@ for prefix in ['darwin', 'linux', 'bsd']:
         if 'LD_LIBRARY_PATH' in os.environ:
             lib_dirs += os.environ['LD_LIBRARY_PATH'].split(':')
 
+        print('include_dirs: ', include_dirs)
+        print('lib_dirs: ', lib_dirs)
+        
         try:
             # get the numpy include path from numpy
             import numpy
