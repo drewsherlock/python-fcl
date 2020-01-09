@@ -81,6 +81,7 @@ for prefix in ['darwin', 'linux', 'bsd']:
                 extra_compile_args = extra_compile_args,
             )],
             language_level=3,
+            compiler="gcc",
             data_files=data_files
         )
         break
