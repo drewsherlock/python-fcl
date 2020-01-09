@@ -26,9 +26,8 @@ for prefix in ['darwin', 'linux', 'bsd']:
                     '/usr/local/lib']
 
         extra_compile_args = ["-std=c++11"]
-        libraries=[
-                '/usr/lib/fcl','/usr/lib/octomap'
-                ],
+        libraries='/usr/lib/fcl' #,'/usr/lib/octomap'
+                #],
         
         if 'CPATH' in os.environ:
             include_dirs += os.environ['CPATH'].split(':')
